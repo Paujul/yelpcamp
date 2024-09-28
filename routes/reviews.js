@@ -1,7 +1,7 @@
 const express = require("express")
 const router = express.Router({ mergeParams: true }) // Biar dpt param id
 
-const { reviewSchema } = require("../schemas.js")
+const { ReviewSchema } = require("../schemas.js")
 
 const Campground = require("../models/campground")
 const Review = require("../models/review.js")
@@ -9,7 +9,7 @@ const Review = require("../models/review.js")
 const catchAsync = require("../utils/catchAsync")
 
 const validateReview = (req, res, next) => {
-  const { error } = reviewSchema.validate(req.body)
+  const { error } = ReviewSchema.validate(req.body)
   if (error) {
     const msg = error.details.map((e) => e.message).join(",")
     throw new ExpressError(msg, 400)
