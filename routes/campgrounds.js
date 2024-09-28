@@ -6,6 +6,7 @@ const Campground = require("../models/campground")
 
 const catchAsync = require("../utils/catchAsync")
 const ExpressError = require("../utils/ExpressError")
+const { isLoggedIn } = require("../middleware")
 
 // ID checker for error validation
 const ObjectID = require("mongoose").Types.ObjectId
@@ -34,7 +35,7 @@ router.get("/", async (req, res) => {
   res.render("campgrounds/index", { campgrounds })
 })
 
-router.get("/new", (req, res) => {
+router.get("/new", isLoggedIn, (req, res) => {
   res.render("campgrounds/new")
 })
 
@@ -59,6 +60,7 @@ router.get(
 
 router.get(
   "/:id/edit",
+  isLoggedIn,
   catchAsync(async (req, res) => {
     const { id } = req.params
     if (!ObjectID.isValid(id)) {
@@ -83,6 +85,7 @@ router.get("/secret", verifyPassword, (req, res) => {
 
 router.post(
   "/",
+  isLoggedIn,
   validateCampground,
   catchAsync(async (req, res, next) => {
     const campground = new Campground(req.body.campground)
@@ -96,6 +99,7 @@ router.post(
 
 router.put(
   "/:id",
+  isLoggedIn,
   validateCampground,
   catchAsync(async (req, res) => {
     const { id } = req.params
@@ -117,6 +121,7 @@ router.put(
 
 router.delete(
   "/:id",
+  isLoggedIn,
   catchAsync(async (req, res) => {
     const { id } = req.params
     await Campground.findByIdAndDelete(id)
