@@ -20,6 +20,7 @@ const seedDB = async () => {
     const price = Math.floor(Math.random() * 20) + 10
     // Seed DB pake cities yg dirandomin sm seedHelper buat randomize titlenya.
     const camp = new Campground({
+      author: "66f6762d88cbb507d9807eec",
       location: `${cities[random1000].city}, ${cities[random1000].state}`,
       title: `${sample(descriptors)} ${sample(places)}`,
       image: `https://picsum.photos/400?random=${Math.random()}`,
