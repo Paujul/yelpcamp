@@ -1,4 +1,8 @@
 const express = require("express")
+const multer = require("multer")
+const { storage } = require("../cloudinary")
+const upload = multer({ storage })
+
 const router = express.Router()
 
 const campgrounds = require("../controllers/campgrounds")
@@ -17,6 +21,7 @@ router
   .get(catchAsync(campgrounds.index))
   .post(
     isLoggedIn,
+    upload.array("image"),
     validateCampground,
     catchAsync(campgrounds.createCampground)
   )
@@ -29,6 +34,7 @@ router
   .put(
     isLoggedIn,
     isAuthor,
+    upload.array("image"),
     validateCampground,
     catchAsync(campgrounds.editCampground)
   )
@@ -36,8 +42,8 @@ router
 
 router.get(
   "/:id/edit",
-  isValid,
   isLoggedIn,
+  isValid,
   isAuthor,
   catchAsync(campgrounds.renderEdit)
 )

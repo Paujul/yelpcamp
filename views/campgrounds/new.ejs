@@ -2,9 +2,15 @@
 <div class="row">
   <h1 class="text-center">New Campground</h1>
   <div class="col-6 offset-3">
-    <form action="/campgrounds" method="POST" class="validated-form" novalidate>
+    <form
+      action="/campgrounds"
+      method="POST"
+      class="validated-form"
+      novalidate
+      enctype="multipart/form-data"
+    >
       <div class="mb-3">
-        <label class="form-label" for="title">Title</label>
+        <label class="form-label fw-bold text-muted" for="title">Title</label>
         <input
           class="form-control"
           type="text"
@@ -15,7 +21,9 @@
         <div class="valid-feedback">Mantap!</div>
       </div>
       <div class="mb-3">
-        <label class="form-label" for="location">Location</label>
+        <label class="form-label fw-bold text-muted" for="location"
+          >Location</label
+        >
         <input
           class="form-control"
           type="text"
@@ -27,19 +35,9 @@
       </div>
 
       <div class="mb-3">
-        <label class="form-label" for="image">Image URL</label>
-        <input
-          class="form-control"
-          type="text"
-          id="image"
-          name="campground[image]"
-          required
-        />
-        <div class="valid-feedback">Mantap!</div>
-      </div>
-
-      <div class="mb-3">
-        <label class="form-label" for="price">Campground Price</label>
+        <label class="form-label fw-bold text-muted" for="price"
+          >Campground Price</label
+        >
         <div class="input-group">
           <span class="input-group-text" id="price-label">$</span>
           <input
@@ -56,7 +54,9 @@
       </div>
 
       <div class="mb-3">
-        <label class="form-label" for="image">Description</label>
+        <label class="form-label fw-bold text-muted" for="description"
+          >Description</label
+        >
         <textarea
           class="form-control"
           type="text"
@@ -66,6 +66,25 @@
         ></textarea>
         <div class="valid-feedback">Mantap!</div>
       </div>
+
+      <label for="image" class="form-label fw-bold text-muted"
+        >Choose Image(s)</label
+      >
+      <div class="form-file custom-file">
+        <input
+          class="form-control"
+          type="file"
+          id="image"
+          name="image"
+          multiple
+        />
+        <label for="image" class="form-file-label form-label">
+          <span class="custom-file-label"></span>
+          <div class="form-file button"></div>
+        </label>
+        <div class="valid-feedback">Mantap!</div>
+      </div>
+
       <div class="mb-3">
         <button class="btn btn-success">Add Campground</button>
       </div>
